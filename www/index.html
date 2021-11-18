@@ -3,8 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <script src="components/loader.js"></script>
+    <script src="components/loader.js">
+    </script>
     <link rel="stylesheet" href="components/loader.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="keys.js"></script>
@@ -30,6 +32,14 @@
         $("#message").html("Failed to create new object, with error code: " + JSON.stringify(err));
       })
     }
+    function fetch() {
+      var TestClass = ncmb.DataStore("FetchTest");
+      TestClass.fetch().then(function(results){
+      var data=results.get("text");
+      var update=results.get("updateDate");
+      $("#message").html(data + ":" + update);
+      })
+      }
     </script>
 </head>
 <body>
@@ -40,7 +50,7 @@
   </div>
   <div id="button">
     <button id="btnA" class="btn" onclick="register()">Register</button>
-    <button id="btnB" class="btn" >Fetch</button>
+    <button id="btnB" class="btn" onclick="fetch()">Fetch</button>
   </div>
   <div id="message">message area</div>
 </body>
